@@ -1,25 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route, Redirect
+} from 'react-router-dom';
+import TutorialesProvider from './components/context/TutorialesContext';
+import { Home } from './components/pages/Home';
+import Formulario from './components/ui/Formulario';
+import EditFormulario from './components/ui/EditFormulario';
+import { Navbar } from './components/ui/Navbar';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <TutorialesProvider>
+        <div className="container">
+          <Navbar/>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/crear" component={Formulario} />
+            <Route exact path="/editar/:id" component={EditFormulario} />
+            <Redirect to="/" />
+          </Switch>
+        </div>
+      </TutorialesProvider>
+    </Router>
   );
 }
 
